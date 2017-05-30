@@ -3,7 +3,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-import {Container, View} from 'native-base'
+import {Container, View, Spinner} from 'native-base'
 
 
 import HeaderBar from './components/Header'
