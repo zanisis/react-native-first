@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  View
+  StyleSheet
 } from 'react-native';
 
+import {Container, View} from 'native-base'
+
+
 import HeaderBar from './components/Header'
+import MainBar from './components/Main'
 class App extends Component {
   constructor(props) {
     super(props)
@@ -13,7 +16,10 @@ class App extends Component {
   render(){
     return(
       <View>
+
         <HeaderBar />
+
+        <MainBar />
       </View>
     )
   }
