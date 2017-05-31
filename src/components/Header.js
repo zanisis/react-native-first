@@ -1,38 +1,45 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 
-import { Icon, Container, Item, Input, Button, Right, Body, Title, Header } from 'native-base';
-export default class HeaderBar extends Component {
+import { Icon, Container, Item, Input, Button, Right, Body, Title, Header, View } from 'native-base';
+
+import { Link } from 'react-router-native'
+
+import {fetchSongs} from '../actions'
+
+
+class HeaderBar extends Component {
     constructor(props){
       super(props)
-      this.state ={
-        searchSong: '',
-        }
-
     }
+
+    componentDidMount(){
+      this.props.fetchSongs()
+    }
+
     render() {
+      console.log('header',this.props)
+      const {navigate} = this.props.navigation
         return (
           <Container>
             <Header searchBar>
               <Title style={{margin:14}}>SingSong</Title>
-              <Body style={{
-                backgroundColor:'white',
-                height: 40
-              }}>
-                <Item>
-                  <Input
-                    placeholder="Search"
-                    name="keyword"
-                    value={this.state.keyword}
-                  />
-                  <Icon name="ios-search" />
-                </Item>
-              </Body>
+
+              <Right>
+                  <Button transparent onPress={()=>navigate('Search')}>
+                    <Icon name='search' />
+                  </Button>
+              </Right>
             </Header>
+            <MainBar />
           </Container>
         );
     }
 }
 
+const dispatchToProps = dispatch=>({
+  fetchSongs : ()=> dispatch(fetchSongs())
+})
 
 const styles = {
   toolbar:{
@@ -42,3 +49,5 @@ const styles = {
     elevation: 5,
   },
 };
+
+export default connect(null,dispatchToProps)(HeaderBar)

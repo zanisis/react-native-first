@@ -11,17 +11,17 @@ import {
   Text,
   View
 } from 'react-native';
+import { StackNavigator } from 'react-navigation'
 
 import App from './src/App.js'
+import SearchContaints from './src/components/Search'
 
-export default class ReactNativeFirst extends Component {
-  render() {
-    return (
-      <View>
-        <App />
-      </View>
-    )}
-}
+const SingSong = StackNavigator({
+  Main: {screen: App},
+  Search: {screen: SearchContaints}
+},{
+  headerMode : 'none'
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ReactNativeFirst', () => ReactNativeFirst);
+AppRegistry.registerComponent('ReactNativeFirst', () => SingSong);

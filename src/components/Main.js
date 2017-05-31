@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 import {ScrollView, StyleSheet, View, ListView} from 'react-native'
 import { List,Content, ListItem, Thumbnail, Text, Body, Icon, Spinner } from 'native-base';
 
 import Song from './Song'
 
-export default class MainBar extends Component {
+class MainBar extends Component {
     constructor(props){
       super(props)
-      this.state = {
-        listSong : []
-      }
-    }
-
-    componentDidMount(){
-      fetch('https://api.soundcloud.com/tracks?client_id=f4323c6f7c0cd73d2d786a2b1cdae80c&limit=5')
-      .then(res => res.json())
-      .then(json => this.setState({listSong: json}))
-      .catch(err => console.log(err))
     }
 
     render() {
-      console.log(this.state.listSong, 'di state')
-      let data = this.state.listSong
+      console.log('mainbar',this.props.getSongs)
+      const data = this.props.getSongs
         return (
           <View style={{marginTop: 70}}>
             { data.length === 0 ?
@@ -36,3 +27,9 @@ export default class MainBar extends Component {
         )
     }
 }
+
+const stateToProps = state =>({
+  getSongs : state.songList
+})
+
+export default connect(stateToProps,null)(MainBar)

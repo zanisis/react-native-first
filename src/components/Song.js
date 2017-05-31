@@ -8,13 +8,12 @@ export default class Song extends Component  {
   }
 
   render(){
-    console.log(this.props.song,'ini dimana')
     let {song} = this.props
     return(
       <View style={{backgroundColor:'#b4b4b4', marginTop:1, marginLeft:10, marginRight:10 }}>
           <List>
             <ListItem>
-              <Thumbnail source={require('./people1.jpg')} />
+              <Thumbnail source={{uri : song.user.avatar_url}} />
               <Body >
                 <Text>{song.user.username}</Text>
                 <Text note style={{color: 'white' }}>{song.title}</Text>
