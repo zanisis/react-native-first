@@ -5,7 +5,9 @@ import { Icon, Container, Item, Input, Button, Right, Body, Title, Header, View 
 
 import { Link } from 'react-router-native'
 
-import {fetchSongs} from '../actions'
+import {fetchSongs,emptySongs} from '../actions'
+import MainBar from './Main'
+
 
 
 class HeaderBar extends Component {
@@ -19,35 +21,26 @@ class HeaderBar extends Component {
 
     render() {
       console.log('header',this.props)
-      const {navigate} = this.props.navigation
+      const {navigation, emptySongs, fetchSongs} = this.props
         return (
           <Container>
             <Header searchBar>
               <Title style={{margin:14}}>SingSong</Title>
-
               <Right>
-                  <Button transparent onPress={()=>navigate('Search')}>
+                  <Button transparent onPress={()=>{emptySongs(); navigation.navigate('Search')}}>
                     <Icon name='search' />
                   </Button>
               </Right>
             </Header>
-            <MainBar />
+            <MainBar mode={'home'}/>
           </Container>
         );
     }
 }
 
-const dispatchToProps = dispatch=>({
+const dispatchToState = dispatch=>({
+  emptySongs : ()=> dispatch(emptySongs()),
   fetchSongs : ()=> dispatch(fetchSongs())
 })
 
-const styles = {
-  toolbar:{
-    backgroundColor: 'white',
-    color: 'white',
-    height: 56,
-    elevation: 5,
-  },
-};
-
-export default connect(null,dispatchToProps)(HeaderBar)
+export default connect(null, dispatchToState)(HeaderBar)

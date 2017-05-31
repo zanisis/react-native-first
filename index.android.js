@@ -5,6 +5,8 @@
  */
 
 import React, { Component } from 'react';
+import {Provider, connect} from 'react-redux'
+
 import {
   AppRegistry,
   StyleSheet,
@@ -15,13 +17,24 @@ import { StackNavigator } from 'react-navigation'
 
 import App from './src/App.js'
 import SearchContaints from './src/components/Search'
+import store from './src/store'
 
-const SingSong = StackNavigator({
-  Main: {screen: App},
-  Search: {screen: SearchContaints}
-},{
-  headerMode : 'none'
-});
+// const SingSong = StackNavigator({
+//   Main: {screen: App},
+//   Search: {screen: SearchContaints}
+// },{
+//   headerMode : 'none'
+// });
+
+export default class SingSong extends Component{
+  render(){
+    return(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

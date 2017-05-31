@@ -8,22 +8,40 @@ import Song from './Song'
 class MainBar extends Component {
     constructor(props){
       super(props)
+
     }
 
     render() {
-      console.log('mainbar',this.props.getSongs)
+      console.log('Mainbar', this.props.getSongs)
       const data = this.props.getSongs
+      console.log('mainbar', data.hasOwnProperty('listSong') ? true : false);
         return (
-          <View style={{marginTop: 70}}>
-            { data.length === 0 ?
+          <View>
+        {this.props.mode === 'home' ?
+          <View style={{marginTop: 20}}>
+            { !data.hasOwnProperty('listSong')?
               <Spinner color='blue'/>
               :
               <ListView
-                dataSource={new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(data)}
+                dataSource={new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(data.listSong)}
                 renderRow={(rowData) => <Song song={rowData} />}
               />
             }
           </View>
+          :
+          <View style={{marginTop: 20}}>
+            { !data.hasOwnProperty('listSong')?
+              <View></View>
+              :
+              <ListView
+                dataSource={new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(data.listSong)}
+                renderRow={(rowData) => <Song song={rowData} />}
+              />
+            }
+          </View>
+        }
+      </View>
+
         )
     }
 }
