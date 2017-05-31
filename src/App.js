@@ -16,9 +16,7 @@ class App extends Component {
   render(){
     return(
       <View>
-
         <HeaderBar />
-
         <MainBar />
       </View>
     )
